@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SCE Cycle Hire</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+    <header class="topbar">
+
+        <div class="brand">
+            <div class="brand-icon">🚲</div>
+
+            <div>
+                <h1>SCE Cycle Hire</h1>
+                <p>Samtse College of Education</p>
+            </div>
+        </div>
+
+        <a href="admin.html" class="admin-button">
+            Admin
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         HERO SECTION
+    ========================== -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <span class="hero-badge">
+                🚴 Easy • Affordable • Convenient
+            </span>
+
+            <h2>
+                Ride Around Campus
+                <span>With Ease</span>
+            </h2>
+
+            <p>
+                Hire a cycle quickly and conveniently around
+                Samtse College of Education.
+            </p>
+
+            <div class="rate-card">
+                <strong>Nu. 100</strong>
+                <span>per hour</span>
+            </div>
+
+        </div>
+
+        <div class="hero-cycle">
+            🚲
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+    <main class="container">
+
+        <!-- =====================
+             BOOKING SECTION
+        ====================== -->
+        <section class="card booking-card">
+
+            <div class="section-heading">
+
+                <div class="section-number">
+                    1
+                </div>
+
+                <div>
+                    <h2>Book a Cycle</h2>
+                    <p>
+                        Fill in your details and select an available
+                        rental time.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <form id="bookingForm">
+
+                <!-- Student Name -->
+                <div class="form-group">
+
+                    <label for="studentName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="studentName"
+                        name="studentName"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Programme -->
+                <div class="form-group">
+
+                    <label for="programme">
+                        Programme / Year
+                    </label>
+
+                    <input
+                        type="text"
+                        id="programme"
+                        name="programme"
+                        placeholder="Example: B.Ed IT Year 3"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Phone -->
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter your phone number"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Hire Date -->
+                <div class="form-group">
+
+                    <label for="hireDate">
+                        Hire Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="hireDate"
+                        name="hireDate"
+                        required
+                    >
+
+                    <small>
+                        Select a date to see available rental slots.
+                    </small>
+
+                </div>
+
+
+                <!-- Available Slots -->
+                <div class="form-group">
+
+                    <label for="timeSlot">
+                        Available Rental Time
+                    </label>
+
+                    <select
+                        id="timeSlot"
+                        name="slotId"
+                        required
+                        disabled
+                    >
+
+                        <option value="">
+                            Select a hire date first
+                        </option>
+
+                    </select>
+
+                    <div
+                        id="slotMessage"
+                        class="slot-message"
+                    >
+                        Please select a date first.
+                    </div>
+
+                </div>
+
+
+                <!-- Price Summary -->
+                <div class="price-box">
+
+                    <div class="price-row">
+                        <span>Hourly Rate</span>
+                        <strong>Nu. 100/hour</strong>
+                    </div>
+
+                    <div class="price-row">
+                        <span>Rental Duration</span>
+                        <strong id="durationText">
+                            —
+                        </strong>
+                    </div>
+
+                    <div class="price-row total-row">
+                        <span>Total Amount</span>
+                        <strong id="totalAmount">
+                            Nu. 0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <!-- Agreement -->
+                <div class="agreement">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            id="agreement"
+                            required
+                        >
+
+                        <span>
+                            I confirm that the information provided
+                            is correct and I agree to follow the
+                            cycle hire rules.
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- Submit -->
+                <button
+                    type="submit"
+                    id="submitButton"
+                    class="submit-button"
+                >
+                    🚲 Submit Booking
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- =====================
+             BOOKING RESULT
+        ====================== -->
+        <section
+            id="bookingResult"
+            class="card result-card hidden"
+        >
+
+            <div class="result-icon">
+                ✓
+            </div>
+
+            <h2>Booking Submitted!</h2>
+
+            <p>
+                Your cycle booking has been successfully submitted.
+            </p>
+
+
+            <div class="booking-reference">
+
+                <span>Booking Reference</span>
+
+                <strong id="bookingId">
+                    —
+                </strong>
+
+            </div>
+
+
+            <div class="result-details">
+
+                <div>
+                    <span>Status</span>
+                    <strong id="resultStatus">
+                        Pending
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Hire Date</span>
+                    <strong id="resultDate">
+                        —
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Rental Time</span>
+                    <strong id="resultTime">
+                        —
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Duration</span>
+                    <strong id="resultDuration">
+                        —
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Amount</span>
+                    <strong id="resultAmount">
+                        —
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <p class="result-note">
+                Please save your booking reference.
+                You can use it below to check your booking status.
+            </p>
+
+        </section>
+
+
+        <!-- =====================
+             CHECK BOOKING
+        ====================== -->
+        <section class="card check-card">
+
+            <div class="section-heading">
+
+                <div class="section-number">
+                    2
+                </div>
+
+                <div>
+                    <h2>Check My Booking</h2>
+
+                    <p>
+                        Check whether your booking has been approved.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form id="checkBookingForm">
+
+                <div class="form-group">
+
+                    <label for="checkBookingId">
+                        Booking Reference
+                    </label>
+
+                    <input
+                        type="text"
+                        id="checkBookingId"
+                        placeholder="Example: SCE-20260910-001"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="checkPhone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="checkPhone"
+                        placeholder="Enter the phone number used for booking"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="check-button"
+                    id="checkButton"
+                >
+                    🔍 Check Booking
+                </button>
+
+            </form>
+
+
+            <!-- Status Result -->
+            <div
+                id="statusResult"
+                class="status-result hidden"
+            >
+
+                <div class="status-header">
+
+                    <span>
+                        Booking Status
+                    </span>
+
+                    <strong id="statusBadge">
+                        Pending
+                    </strong>
+
+                </div>
+
+
+                <div class="status-details">
+
+                    <div>
+                        <span>Booking ID</span>
+                        <strong id="statusBookingId">
+                            —
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Student</span>
+                        <strong id="statusStudent">
+                            —
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Hire Date</span>
+                        <strong id="statusDate">
+                            —
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Rental Time</span>
+                        <strong id="statusTime">
+                            —
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Duration</span>
+                        <strong id="statusDuration">
+                            —
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>Amount</span>
+                        <strong id="statusAmount">
+                            —
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="approvalMessage"
+                    class="approval-message"
+                >
+                    Your booking is waiting for admin approval.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================
+             HOW IT WORKS
+        ====================== -->
+        <section class="how-section">
+
+            <div class="section-title">
+
+                <span>
+                    SIMPLE PROCESS
+                </span>
+
+                <h2>
+                    How It Works
+                </h2>
+
+            </div>
+
+
+            <div class="steps">
+
+                <div class="step-card">
+
+                    <div class="step-icon">
+                        📅
+                    </div>
+
+                    <h3>
+                        1. Choose Date
+                    </h3>
+
+                    <p>
+                        Select the date you want to hire a cycle.
+                    </p>
+
+                </div>
+
+
+                <div class="step-card">
+
+                    <div class="step-icon">
+                        🕐
+                    </div>
+
+                    <h3>
+                        2. Select Time
+                    </h3>
+
+                    <p>
+                        Choose an available rental time slot.
+                    </p>
+
+                </div>
+
+
+                <div class="step-card">
+
+                    <div class="step-icon">
+                        📝
+                    </div>
+
+                    <h3>
+                        3. Submit Booking
+                    </h3>
+
+                    <p>
+                        Enter your details and submit your request.
+                    </p>
+
+                </div>
+
+
+                <div class="step-card">
+
+                    <div class="step-icon">
+                        ✅
+                    </div>
+
+                    <h3>
+                        4. Get Approval
+                    </h3>
+
+                    <p>
+                        Check your booking to see the approval status.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <footer>
+
+        <div class="footer-content">
+
+            <div>
+                <strong>
+                    🚲 SCE Cycle Hire
+                </strong>
+
+                <p>
+                    Samtse College of Education
+                </p>
+            </div>
+
+            <p>
+                © 2026 SCE Cycle Hire
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         LOADING OVERLAY
+    ========================== -->
+    <div
+        id="loadingOverlay"
+        class="loading-overlay hidden"
+    >
+
+        <div class="loading-box">
+
+            <div class="loader"></div>
+
+            <p id="loadingText">
+                Processing...
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>

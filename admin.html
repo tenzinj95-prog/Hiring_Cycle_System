@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>SCE Cycle Hire - Admin</title>
+
+<link rel="stylesheet" href="admin.css">
+```
+
+</head>
+
+<body>
+
+```
+<!-- =====================================================
+     LOGIN SCREEN
+====================================================== -->
+
+<section id="loginScreen" class="login-screen">
+
+    <div class="login-card">
+
+        <div class="login-logo">
+            🚲
+        </div>
+
+        <h1>SCE Cycle Hire</h1>
+
+        <p class="login-subtitle">
+            Administrator Dashboard
+        </p>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+
+                <label for="adminPassword">
+                    Admin Password
+                </label>
+
+                <input
+                    type="password"
+                    id="adminPassword"
+                    placeholder="Enter admin password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="primary-button login-button"
+            >
+                🔐 Login
+            </button>
+
+        </form>
+
+        <p class="login-help">
+            SCE Cycle Hire Management System
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ADMIN APPLICATION
+====================================================== -->
+
+<div id="adminApp" class="admin-app hidden">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-icon">
+                🚲
+            </div>
+
+            <div>
+                <h2>SCE Cycle Hire</h2>
+                <span>Admin Panel</span>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <button
+                class="nav-item active"
+                data-page="dashboardPage"
+            >
+                <span class="nav-icon">📊</span>
+                <span>Dashboard</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-page="slotsPage"
+            >
+                <span class="nav-icon">🕒</span>
+                <span>Rental Slots</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-page="bookingsPage"
+            >
+                <span class="nav-icon">📋</span>
+                <span>Bookings</span>
+            </button>
+
+
+            <a
+                href="index.html"
+                class="nav-item student-link"
+            >
+                <span class="nav-icon">🎓</span>
+                <span>Student Booking</span>
+            </a>
+
+
+            <button
+                class="nav-item logout-item"
+                id="logoutButton"
+            >
+                <span class="nav-icon">🚪</span>
+                <span>Logout</span>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="admin-profile">
+
+                <div class="profile-icon">
+                    A
+                </div>
+
+                <div>
+                    <strong>Administrator</strong>
+                    <span>SCE Cycle Hire</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =================================================
+         MAIN CONTENT
+    ================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- =============================================
+             TOP BAR
+        ============================================== -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="topbar-label">
+                    Management System
+                </p>
+
+                <h1 id="pageTitle">
+                    Dashboard
+                </h1>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <a
+                    href="index.html"
+                    class="view-student-button"
+                >
+                    🌐 Student Site
+                </a>
+
+                <button
+                    id="refreshButton"
+                    class="refresh-button"
+                    title="Refresh data"
+                >
+                    🔄
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             DASHBOARD PAGE
+        ================================================== -->
+
+        <section
+            id="dashboardPage"
+            class="admin-page active-page"
+        >
+
+            <div class="page-intro">
+
+                <div>
+
+                    <h2>
+                        Welcome back 👋
+                    </h2>
+
+                    <p>
+                        Manage cycle bookings, rental slots and student requests.
+                    </p>
+
+                </div>
+
+                <div class="today-date" id="dashboardDate">
+                    —
+                </div>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+
+            <div class="stats-grid">
+
+
+                <div class="stat-card purple-card">
+
+                    <div class="stat-icon">
+                        📋
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>Total Bookings</span>
+
+                        <strong id="totalBookings">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card blue-card">
+
+                    <div class="stat-icon">
+                        📅
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>Today's Bookings</span>
+
+                        <strong id="todayBookings">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card orange-card">
+
+                    <div class="stat-icon">
+                        🚴
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>Ongoing Rentals</span>
+
+                        <strong id="ongoingBookings">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card green-card">
+
+                    <div class="stat-icon">
+                        💰
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span>Total Earnings</span>
+
+                        <strong>
+                            Nu. <span id="totalEarnings">0</span>
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD TWO COLUMN -->
+
+            <div class="dashboard-grid">
+
+
+                <!-- CYCLE STATUS -->
+
+                <div class="panel cycle-status-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Cycle Status
+                            </h3>
+
+                            <p>
+                                Current rental availability
+                            </p>
+
+                        </div>
+
+                        <span
+                            id="adminCycleStatus"
+                            class="status-pill available"
+                        >
+                            Available
+                        </span>
+
+                    </div>
+
+
+                    <div class="cycle-visual">
+
+                        <div class="big-cycle">
+                            🚲
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Campus Cycles
+                            </strong>
+
+                            <p id="cycleStatusText">
+                                Ready for student bookings
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Quick Actions
+                            </h3>
+
+                            <p>
+                                Frequently used tools
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+                        <button
+                            class="quick-action"
+                            data-go-page="slotsPage"
+                        >
+                            <span>🕒</span>
+                            <div>
+                                <strong>Add Rental Slot</strong>
+                                <small>Create a new time slot</small>
+                            </div>
+                        </button>
+
+
+                        <button
+                            class="quick-action"
+                            data-go-page="bookingsPage"
+                        >
+                            <span>📋</span>
+                            <div>
+                                <strong>View Bookings</strong>
+                                <small>Manage student requests</small>
+                            </div>
+                        </button>
+
+
+                        <a
+                            href="index.html"
+                            class="quick-action"
+                        >
+                            <span>🎓</span>
+                            <div>
+                                <strong>Student Site</strong>
+                                <small>Open booking page</small>
+                            </div>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECENT BOOKINGS -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h3>
+                            Recent Bookings
+                        </h3>
+
+                        <p>
+                            Latest student booking requests
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="text-button"
+                        data-go-page="bookingsPage"
+                    >
+                        View All →
+                    </button>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Student</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="recentBookingTable">
+
+                            <tr>
+                                <td colspan="6" class="empty-table">
+                                    Loading bookings...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RENTAL SLOTS PAGE
+        ================================================== -->
+
+        <section
+            id="slotsPage"
+            class="admin-page"
+        >
+
+            <div class="page-intro">
+
+                <div>
+
+                    <h2>
+                        Rental Slots 🕒
+                    </h2>
+
+                    <p>
+                        Create and manage available cycle rental times.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ADD SLOT -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h3>
+                            Add Rental Slot
+                        </h3>
+
+                        <p>
+                            Create a time slot students can book.
+                        </p>
+
+                    </div>
+
+                    <div class="rate-display">
+                        Nu. 100/hour
+                    </div>
+
+                </div>
+
+
+                <form id="slotForm">
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="slotDate">
+                                Rental Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="slotDate"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="slotStartTime">
+                                Start Time
+                            </label>
+
+                            <input
+                                type="time"
+                                id="slotStartTime"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="slotEndTime">
+                                End Time
+                            </label>
+
+                            <input
+                                type="time"
+                                id="slotEndTime"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Duration / Price
+                            </label>
+
+                            <div
+                                id="slotPreview"
+                                class="input-preview"
+                            >
+                                Select start and end time
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="submit"
+                            id="addSlotButton"
+                            class="primary-button"
+                        >
+                            ➕ Add Rental Slot
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- SLOT FILTER -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h3>
+                            Rental Slots
+                        </h3>
+
+                        <p>
+                            Manage your available rental schedule.
+                        </p>
+
+                    </div>
+
+                    <div class="filter-inline">
+
+                        <label for="slotDateFilter">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="slotDateFilter"
+                        >
+
+                        <button
+                            id="clearSlotFilter"
+                            class="small-button"
+                            type="button"
+                        >
+                            Clear
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Duration</th>
+                                <th>Rate</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="slotTable">
+
+                            <tr>
+                                <td colspan="6" class="empty-table">
+                                    Loading rental slots...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             BOOKINGS PAGE
+        ================================================== -->
+
+        <section
+            id="bookingsPage"
+            class="admin-page"
+        >
+
+            <div class="page-intro">
+
+                <div>
+
+                    <h2>
+                        Student Bookings 📋
+                    </h2>
+
+                    <p>
+                        Review and manage all cycle hire requests.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- FILTERS -->
+
+            <div class="panel">
+
+                <div class="filters">
+
+                    <div class="filter-group search-filter">
+
+                        <label for="bookingSearch">
+                            Search
+                        </label>
+
+                        <input
+                            type="search"
+                            id="bookingSearch"
+                            placeholder="Booking ID, student name or phone..."
+                        >
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label for="bookingDateFilter">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="bookingDateFilter"
+                        >
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label for="bookingStatusFilter">
+                            Status
+                        </label>
+
+                        <select id="bookingStatusFilter">
+
+                            <option value="">
+                                All Statuses
+                            </option>
+
+                            <option value="Pending">
+                                Pending
+                            </option>
+
+                            <option value="Approved">
+                                Approved
+                            </option>
+
+                            <option value="Rejected">
+                                Rejected
+                            </option>
+
+                            <option value="Ongoing">
+                                Ongoing
+                            </option>
+
+                            <option value="Returned">
+                                Returned
+                            </option>
+
+                            <option value="Cancelled">
+                                Cancelled
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-actions">
+
+                        <button
+                            id="clearBookingFilters"
+                            class="secondary-button"
+                            type="button"
+                        >
+                            Clear Filters
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOOKINGS TABLE -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h3>
+                            All Bookings
+                        </h3>
+
+                        <p id="bookingCount">
+                            Loading...
+                        </p>
+
+                    </div>
+
+                    <button
+                        id="refreshBookingsButton"
+                        class="small-button"
+                        type="button"
+                    >
+                        🔄 Refresh
+                    </button>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table class="booking-table">
+
+                        <thead>
+
+                            <tr>
+                                <th>Booking</th>
+                                <th>Student</th>
+                                <th>Programme</th>
+                                <th>Date</th>
+                                <th>Rental Time</th>
+                                <th>Duration</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="bookingTable">
+
+                            <tr>
+                                <td colspan="9" class="empty-table">
+                                    Loading bookings...
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     TOAST NOTIFICATION
+====================================================== -->
+
+<div
+    id="toast"
+    class="toast"
+>
+
+    <div
+        id="toastIcon"
+        class="toast-icon"
+    >
+        ✓
+    </div>
+
+    <div>
+
+        <strong id="toastTitle">
+            Success
+        </strong>
+
+        <p id="toastMessage">
+            Operation completed.
+        </p>
+
+    </div>
+
+    <button
+        id="toastClose"
+        class="toast-close"
+        type="button"
+    >
+        ×
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     LOADING OVERLAY
+====================================================== -->
+
+<div
+    id="loadingOverlay"
+    class="loading-overlay hidden"
+>
+
+    <div class="loading-box">
+
+        <div class="loading-spinner"></div>
+
+        <p id="loadingText">
+            Loading...
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     ADMIN JAVASCRIPT
+====================================================== -->
+
+<script src="admin.js"></script>
+```
+
+</body>
+</html>

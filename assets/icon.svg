@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="110" fill="#4f46e5"/>
+
+  <!-- SCE -->
+  <text x="256" y="100"
+        text-anchor="middle"
+        font-family="Arial, sans-serif"
+        font-size="48"
+        font-weight="bold"
+        fill="white">SCE</text>
+
+  <!-- Wheels -->
+  <circle cx="150" cy="360" r="65"
+          fill="none"
+          stroke="white"
+          stroke-width="18"/>
+
+  <circle cx="362" cy="360" r="65"
+          fill="none"
+          stroke="white"
+          stroke-width="18"/>
+
+  <!-- Bicycle frame -->
+  <path d="M150 360 L220 210 L290 360 L150 360"
+        fill="none"
+        stroke="white"
+        stroke-width="18"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Handlebar -->
+  <path d="M220 210 L275 210 L320 270"
+        fill="none"
+        stroke="white"
+        stroke-width="18"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Seat -->
+  <path d="M275 210 L300 175"
+        fill="none"
+        stroke="white"
+        stroke-width="18"
+        stroke-linecap="round"/>
+
+  <!-- Handle -->
+  <path d="M210 210 L185 175"
+        fill="none"
+        stroke="white"
+        stroke-width="18"
+        stroke-linecap="round"/>
+</svg>
